@@ -37,6 +37,17 @@ public class FirstFragment extends Fragment {
         });
 
         RoundCornerImageView imageView = view.findViewById(R.id.iv_test);
+        Bitmap bitmap = getSimpleScaleBitmap();
+        if (bitmap != null){
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
+    /**
+     * 简单缩放
+     * @return bitmap
+     */
+    private Bitmap getSimpleScaleBitmap(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(getResources(), R.mipmap.test, options);
@@ -52,9 +63,6 @@ public class FirstFragment extends Fragment {
         }
         options.inJustDecodeBounds = false;
         options.inSampleSize = scale;
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test, options);
-        if (bitmap != null){
-            imageView.setImageBitmap(bitmap);
-        }
+        return BitmapFactory.decodeResource(getResources(), R.mipmap.test, options);
     }
 }
